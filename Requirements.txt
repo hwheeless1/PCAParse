@@ -1,0 +1,6 @@
+# Requirements for utilization
+dkpt
+Wireshark/tshark
+scapy
+
+# If these are not installed, please refer to the bash script for install
