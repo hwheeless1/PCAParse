@@ -1,6 +1,9 @@
-# Requirements for utilization
-dkpt
-Wireshark/tshark
-scapy
+# Assumed preinstalled tools
 
-# If these are not installed, please refer to the bash script for install
+Wireshark
+python3
+
+# Required python modules. If these are not installed, please refer to the bash script for install
+
+dkpt
+scapy
