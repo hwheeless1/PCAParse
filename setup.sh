@@ -16,5 +16,6 @@ apt-get install python3-pip
 pip install dpkt
 pip install scapy
 pip install pyfiglet
+pip install argparse
 echo
 echo 'You Have Installed PCAParse and All Required Packages!'
