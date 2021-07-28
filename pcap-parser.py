@@ -11,10 +11,8 @@ def banner_message(message):
         return(f.renderText("PCAParser"))
 
 def live_capture(param):
-    #Add a time feature well? in Seconds
     #Add in -f for checking a specific IP -f "host <IP>" or "protocol"
-    # print("Would you like to do a recursive network dump?")
-    return(os.system("tshark -T fields -e frame.time -i {} -w {}.pcapng > {} -F pcapng -c {}".format(*param)))
+    return(os.system("tshark -i {} -w {}.pcapng {}".format(*param)))
 
 def convert(param2):
     os.system ('tshark -r {} > {}.txt'.format(*param2))
@@ -88,20 +86,21 @@ def main():
     print(banner_message("start"))
     print("Welcome to PCAParse, your handy dandy swiss army knife to help you easily parse PCAP files. One small note...\n\
 MAKE SURE YOU ARE SUDO!!")
-    # checksum = input("Please type YES to make sure you are sudo")
-    # if checksum == "YES":
-    #     pass
-    # else:
-    #     exit
     print("Are you working on a live capture or existing PCAP?")
     choice = input_check("Type L for live Capture OR E for Existing PCAP   ", "Invalid input. Expected L or M." , validate_list, ["E", "e", "L", "l"])
     if choice in ["L", "l"]:
         os.system("tshark -D")
-        cap_int = str(input("Which interface are you looking to scan? (The name not the number)"))
+        cap_int = str(input("Which interface are you looking to scan? (name or number)"))
         out_file = "/tmp/" + str(input("Where do you want this file saved?"))
         print("Your file will be saved as " + out_file + " and as "+out_file+".pcapng")
-        packet_count = int(input("How many packets do you want counted?"))
-        param = cap_int, out_file, out_file, packet_count
+        print("Are you looking to save a particular number of packets or a timed capture?")
+        choices = input_check("Type c for Count or a for Time:   ", "Invalid input. Expected c or a." , validate_list, ["a", "A", "c", "C"])
+        if choices in ["a", "A"]:
+                option = int(input("How long do you want to scan for (in seconds):     "))
+                packet_count ="-a duration:%d" % (option,)
+        else:
+                packet_count = "-c " + (input("How many packets do you want captured:      "))
+        param = cap_int, out_file, packet_count
         print(live_capture(param))
     
     elif choice in ["E", "e"]:
