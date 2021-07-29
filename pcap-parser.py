@@ -4,6 +4,7 @@
 import dpkt
 import os
 from pyfiglet import Figlet
+import time
 
 def banner_message(message):
     if message == "start":
@@ -12,10 +13,11 @@ def banner_message(message):
 
 def live_capture(param):
     #Add in -f for checking a specific IP -f "host <IP>" or "protocol"
-    return(os.system("tshark -i {} -w {}.pcapng {}".format(*param)))
+    return(os.system("tshark -i {} -w {}.pcapng {} ".format(*param)))
 
+    
 def convert(param2):
-    os.system ('tshark -r {} > {}.txt'.format(*param2))
+    return(os.system ('tshark -r {} -T fields -E header=y -E separator=, -E quote=d -E occurrence=f -e ip.version -e ip.hdr_len -e ip.tos -e ip.id -e ip.flags -e ip.flags.rb -e ip.flags.df -e ip.flags.mf -e ip.frag_offset -e ip.ttl -e ip.proto -e ip.checksum -e ip.src -e ip.dst -e ip.len -e ip.dsfield -e tcp.srcport -e tcp.dstport -e tcp.seq -e tcp.ack -e tcp.len -e tcp.hdr_len -e tcp.flags -e tcp.flags.fin -e tcp.flags.syn -e tcp.flags.reset -e tcp.flags.push -e tcp.flags.ack -e tcp.flags.urg -e tcp.flags.cwr -e tcp.window_size -e tcp.checksum -e tcp.urgent_pointer -e tcp.options.mss_val > {}.txt'.format(*param2)))
 
 def seeker(filename):
     print("So, this is a bit advanced, so we don't have all 100 or so Display\
@@ -26,7 +28,7 @@ So if you want a better break down of how to use Search Filter options, please r
 available on our github.")
     search = str(input("With that out of the way, please enter your desired Display Filter search:"))
     destination = "/tmp/" + str(input("We are going to put this into your tmp folder, please enter file name:")) + ".pcapng"
-    os.system('tshark -r {} -Y "{}" -w {}'.format(filename, search, destination))
+    return(os.system('tshark -r {} -Y "{}" -w {}'.format(filename, search, destination)))
 
 
 def counters(filename):
@@ -58,10 +60,10 @@ def counters(filename):
              Total number of packets in the pcap file: {}\n\
              Total number of ip packets: {}\n\
              Total number of tcp packets: {}\n\
-             Total number of udp packets: ").format(counter,ipcounter,tcpcounter,udpcounter)
+             Total number of udp packets: {}").format(counter,ipcounter,tcpcounter,udpcounter)
 
 def export(param4):
-        os.system("tshark -r {} --export-objects {},{}".format(*param4))
+        return(os.system("tshark -r {} --export-objects {},{}".format(*param4)))
 
 def input_check(usr_prompt, error, is_valid, valid_list):
     user_input = input(usr_prompt)
@@ -84,15 +86,16 @@ def validate_number(item, lst):
  
 def main():
     print(banner_message("start"))
-    print("Welcome to PCAParse, your handy dandy swiss army knife to help you easily parse PCAP files. One small note...\n\
-MAKE SURE YOU ARE SUDO!!")
+    print("Welcome to PCAParse, your handy dandy swiss army knife to help you easily parse PCAP files.")
     print("Are you working on a live capture or existing PCAP?")
     choice = input_check("Type L for live Capture OR E for Existing PCAP   ", "Invalid input. Expected L or M." , validate_list, ["E", "e", "L", "l"])
     if choice in ["L", "l"]:
+        print("Live Capture Needs to ran as sudo/root user")
+        time.sleep(2)
         os.system("tshark -D")
         cap_int = str(input("Which interface are you looking to scan? (name or number)"))
         out_file = "/tmp/" + str(input("Where do you want this file saved?"))
-        print("Your file will be saved as " + out_file + " and as "+out_file+".pcapng")
+        print("Your file will be saved as " + out_file)
         print("Are you looking to save a particular number of packets or a timed capture?")
         choices = input_check("Type c for Count or a for Time:   ", "Invalid input. Expected c or a." , validate_list, ["a", "A", "c", "C"])
         if choices in ["a", "A"]:
@@ -100,7 +103,7 @@ MAKE SURE YOU ARE SUDO!!")
                 packet_count ="-a duration:%d" % (option,)
         else:
                 packet_count = "-c " + (input("How many packets do you want captured:      "))
-        param = cap_int, out_file, packet_count
+        param = cap_int, out_file, packet_count, out_file
         print(live_capture(param))
     
     elif choice in ["E", "e"]:
@@ -118,10 +121,10 @@ MAKE SURE YOU ARE SUDO!!")
             print("So are we looking to Export[X] or Search[S] within the PCAP?")
             choice3 = input_check("S or X?  ", "Invalid input, Expected S or X." , validate_list, ["S", "s", "X", "x"])
             if choice3 in ["x", "X"]:
-                dst_dir = "/tmp/" +str(input("Enter your destination directory:"))
+                dst_dir = "/tmp/" +str(input("Enter your destination directory:     "))
                 print("Your directory will be saved as" + dst_dir)
                 print("What file type are you looking for? Enter only 1:\n dicom \n http \n imf \n smb \n tftp")
-                exports = str(input("Enter export object type: "))
+                exports = str(input("Enter export object type:    "))
                 param4 = filename, exports, dst_dir
                 print(export(param4))
                 print("You can find your destination folder here:   {}".format(dst_dir))
