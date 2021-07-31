@@ -15,6 +15,6 @@ ln -s "$(pwd)"/PCAParse.py /usr/bin/PCAParse
 apt-get install python3-pip
 pip install dpkt
 pip install pyfiglet
-pip install argparse
+
 echo
 echo 'You Have Installed PCAParse and All Required Packages!'
