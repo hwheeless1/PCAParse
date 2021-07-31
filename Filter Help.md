@@ -4,17 +4,17 @@ We will start with what seems to be the more familiar of the two, DISPLAY FILTER
 
 Quick references that we have found online:
 
-:(https://tshark.dev/analyze/packet_hunting/packet_hunting/
-https://packetlife.net/media/library/13/Wireshark_Display_Filters.pdf
-https://www.stationx.net/wireshark-cheat-sheet/
+[TShark Display Filter Publication](https://tshark.dev/analyze/packet_hunting/packet_hunting/)
+[Display Filter Cheat Sheet](https://packetlife.net/media/library/13/Wireshark_Display_Filters.pdf)
+[Another Cheat Sheet](https://www.stationx.net/wireshark-cheat-sheet/)
 
 
 As for CAPTURE FILTERS there seems to be some added complexity. This is primarily due to the logic engines built into each format, but that is for another day. 
 
 Here are a few more reference guides for CAPTURE FILTERS. 
 
-https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters
-http://www.tcpdump.org/manpages/pcap-filter.7.html 
+[Capture Filter Help](https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters)
+[TShark Capture Filter Manual](http://www.tcpdump.org/manpages/pcap-filter.7.html)
 
 
 And if you really wanted to know how tshark parses packets using capture filters, here is a lengthy article on the matter. 
