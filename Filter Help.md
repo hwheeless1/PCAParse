@@ -5,7 +5,9 @@ We will start with what seems to be the more familiar of the two, DISPLAY FILTER
 Quick references that we have found online:
 
 [TShark Display Filter Publication](https://tshark.dev/analyze/packet_hunting/packet_hunting/)
+
 [Display Filter Cheat Sheet](https://packetlife.net/media/library/13/Wireshark_Display_Filters.pdf)
+
 [Another Cheat Sheet](https://www.stationx.net/wireshark-cheat-sheet/)
 
 
@@ -14,6 +16,7 @@ As for CAPTURE FILTERS there seems to be some added complexity. This is primaril
 Here are a few more reference guides for CAPTURE FILTERS. 
 
 [Capture Filter Help](https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters)
+
 [TShark Capture Filter Manual](http://www.tcpdump.org/manpages/pcap-filter.7.html)
 
 
