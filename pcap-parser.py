@@ -112,7 +112,6 @@ def main():
         else:
                 packet_count = "-c " + (input("How many packets do you want captured:      "))
         param = cap_int, out_file, packet_count
-        print(type(param))
         print(live_capture(param))
     
     elif choice in ["E", "e"]:
