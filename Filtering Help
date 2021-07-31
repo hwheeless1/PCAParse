@@ -4,7 +4,7 @@ We will start with what seems to be the more familiar of the two, DISPLAY FILTER
 
 Quick references that we have found online:
 
-[TShark Display Filter Publication](https://tshark.dev/analyze/packet_hunting/packet_hunting/)
+[TShark Display Filter Publication](https://tshark.dev/analyze/packet_hunting/packet_hunting)
 [Display Filter Cheat Sheet](https://packetlife.net/media/library/13/Wireshark_Display_Filters.pdf)
 [Additional Display Filter Help](https://www.stationx.net/wireshark-cheat-sheet/)
 
