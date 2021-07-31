@@ -1,10 +1,9 @@
 # Assumed preinstalled tools
 
-Wireshark
-python3
+Wireshark/Tshark (can be installed with sudo apt install [wireshark-qt or tshark])
+Python3 (can be installed with sudo apt install python3)
 
 # Required python modules. If these are not installed, please refer to the bash script for install
 
 dkpt
 pyfiglet
-argparse
