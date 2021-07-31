@@ -12,8 +12,16 @@ def banner_message(message):
         return(f.renderText("PCAParser"))
 
 def live_capture(param):
-    #Add in -f for checking a specific IP -f "host <IP>" or "protocol"
-    return(os.system("tshark -i {} -w {}.pcapng {} ".format(*param)))
+    option = input_check("Did you want to scan the live capture for anything specific? If so, please refer to our Github for DISPLAY FILTER SYNTAX. Type Y or N     " , "Invalid input: Expected Y or N" , validate_list, ["Y", "y", "N", "N"])
+    if option in ["Y", "y"]:
+        search = input("What display filter option(s):    ")
+        param_list = list(param)
+        param_list.append(search)
+        new_param = tuple(param_list)
+        print(new_param)
+        return(os.system("tshark -i {} -w {}.pcapng {} -f {} ".format(*new_param)))
+    else:
+        return(os.system("tshark -i {} -w {}.pcapng {} ".format(*param)))
 
     
 def convert(param2):
@@ -93,8 +101,8 @@ def main():
         print("Live Capture Needs to ran as sudo/root user")
         time.sleep(2)
         os.system("tshark -D")
-        cap_int = str(input("Which interface are you looking to scan? (name or number)"))
-        out_file = "/tmp/" + str(input("Where do you want this file saved?"))
+        cap_int = str(input("Which interface are you looking to scan? (name or number)"    ))
+        out_file = "/tmp/" + str(input("Where do you want this file saved?"    ))
         print("Your file will be saved as " + out_file)
         print("Are you looking to save a particular number of packets or a timed capture?")
         choices = input_check("Type c for Count or a for Time:   ", "Invalid input. Expected c or a." , validate_list, ["a", "A", "c", "C"])
@@ -103,28 +111,29 @@ def main():
                 packet_count ="-a duration:%d" % (option,)
         else:
                 packet_count = "-c " + (input("How many packets do you want captured:      "))
-        param = cap_int, out_file, packet_count, out_file
+        param = cap_int, out_file, packet_count
+        print(type(param))
         print(live_capture(param))
     
     elif choice in ["E", "e"]:
         os.system("ls -hl *pcap*")
-        filename = input("Enter your filename: ")
+        filename = input("Enter your filename:    ")
         print(counters(filename))
         print("Are you looking to convert this PCAP to a CSV?")
         choice2 = input_check("Y or N?   ", "Invalid input, Expected Y or N." , validate_list, ["yes", "Yes", "Y", "y", "No", "no", "n", "N"])
         if choice2 in ["yes", "Yes", "Y", "y"]:
-            dst_file = "/tmp/" + str(input("Enter your destination file here:"))
+            dst_file = "/tmp/" + str(input("Enter your destination file here:   "))
             print("Your file will be saved as" + dst_file)
             param2 = filename, dst_file
             print(convert(param2))
         elif choice2 in ["No", "no", "n", "N"]:
             print("So are we looking to Export[X] or Search[S] within the PCAP?")
-            choice3 = input_check("S or X?  ", "Invalid input, Expected S or X." , validate_list, ["S", "s", "X", "x"])
+            choice3 = input_check("S or X?    ", "Invalid input, Expected S or X." , validate_list, ["S", "s", "X", "x"])
             if choice3 in ["x", "X"]:
                 dst_dir = "/tmp/" +str(input("Enter your destination directory:     "))
                 print("Your directory will be saved as" + dst_dir)
                 print("What file type are you looking for? Enter only 1:\n dicom \n http \n imf \n smb \n tftp")
-                exports = str(input("Enter export object type:    "))
+                exports = str(input("Enter export object type:     "))
                 param4 = filename, exports, dst_dir
                 print(export(param4))
                 print("You can find your destination folder here:   {}".format(dst_dir))
