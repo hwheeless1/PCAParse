@@ -1,8 +1,8 @@
-Depending on where you are at in the code itself, you are either looking for either DISPLAY or CAPTURE filter syntax. These are not the same. 
+Depending on where you are at in the code itself, you are either looking for either **DISPLAY** or **CAPTURE** filter syntax. These are not the same. 
 
 We will start with what seems to be the more familiar of the two, DISPLAY FILTERS. We say this because this is the same syntax you would use in the GUI version of Wireshark. 
 
-Quick references that we have found online:
+## Display Filters
 
 [TShark Display Filter Publication](https://tshark.dev/analyze/packet_hunting/packet_hunting/)
 
@@ -13,7 +13,7 @@ Quick references that we have found online:
 
 As for CAPTURE FILTERS there seems to be some added complexity. This is primarily due to the logic engines built into each format, but that is for another day. 
 
-Here are a few more reference guides for CAPTURE FILTERS. 
+## Capture Filters
 
 [Capture Filter Help](https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters)
 
