@@ -1,5 +1,6 @@
 #!/bin/bash
 
+### RUN AS SUDO ###
 #Creating a Setup Folder wherever you run this script from
 #Download the code for our program from GitHub
 #Make it executable as well as a command itself
