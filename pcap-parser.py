@@ -35,7 +35,7 @@ def live_capture(param):
     #More filter options lay here, also these are considered display filters for formatting purposes. 
     #We just included as many as possible in the CSV file. Of course this can be edited in your final version.
 def convert(param2):
-    return(os.system ('tshark -r {} -T fields -E header=y -E separator=, -E quote=d -E occurrence=f -e ip.version -e ip.hdr_len -e ip.tos -e ip.id -e ip.flags -e ip.flags.rb -e ip.flags.df -e ip.flags.mf -e ip.frag_offset -e ip.ttl -e ip.proto -e ip.checksum -e ip.src -e ip.dst -e ip.len -e ip.dsfield -e tcp.srcport -e tcp.dstport -e tcp.seq -e tcp.ack -e tcp.len -e tcp.hdr_len -e tcp.flags -e tcp.flags.fin -e tcp.flags.syn -e tcp.flags.reset -e tcp.flags.push -e tcp.flags.ack -e tcp.flags.urg -e tcp.flags.cwr -e tcp.window_size -e tcp.checksum -e tcp.urgent_pointer -e tcp.options.mss_val > {}.txt'.format(*param2)))
+    return(os.system ('tshark -r {} -T fields -E header=y -E separator=, -E quote=d -E occurrence=f -e ip.version -e ip.hdr_len -e ip.tos -e ip.id -e ip.flags -e ip.flags.rb -e ip.flags.df -e ip.flags.mf -e ip.frag_offset -e ip.ttl -e ip.proto -e ip.checksum -e ip.src -e ip.dst -e ip.len -e ip.dsfield -e tcp.srcport -e tcp.dstport -e tcp.seq -e tcp.ack -e tcp.len -e tcp.hdr_len -e tcp.flags -e tcp.flags.fin -e tcp.flags.syn -e tcp.flags.reset -e tcp.flags.push -e tcp.flags.ack -e tcp.flags.urg -e tcp.flags.cwr -e tcp.window_size -e tcp.checksum -e tcp.urgent_pointer -e tcp.options.mss_val > {}.csv'.format(*param2)))
 
 #Seeker function
 #The length and formatting of placing each potential filter option would be nearly impossible, so we stripped it way way down. 
@@ -149,7 +149,7 @@ def main():
         choice2 = input_check("Y or N?   ", "Invalid input, Expected Y or N." , validate_list, ["yes", "Yes", "Y", "y", "No", "no", "n", "N"])
         if choice2 in ["yes", "Yes", "Y", "y"]:
             dst_file = "/tmp/" + str(input("Enter your destination file here:   "))
-            print("Your file will be saved as" + dst_file)
+            print("Your file will be saved as" + dst_file+".csv")
             param2 = filename, dst_file
             print(convert(param2))
         elif choice2 in ["No", "no", "n", "N"]:
